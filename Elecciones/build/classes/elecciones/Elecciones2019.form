@@ -48,7 +48,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel11" min="-2" pref="130" max="-2" attributes="0"/>
-                              <EmptySpace pref="212" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel12" min="-2" pref="81" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                           </Group>
@@ -64,7 +64,7 @@
                                   <Component id="TXT_C2" alignment="0" max="32767" attributes="0"/>
                                   <Component id="TXT_C1" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="113" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="TXT_POR1" max="32767" attributes="0"/>
                                   <Component id="TXT_POR2" max="32767" attributes="0"/>
@@ -75,7 +75,7 @@
                                   <Component id="TXT_PORBLANCOS" max="32767" attributes="0"/>
                                   <Component id="TXT_PORNULOS" pref="90" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="TXT_GANADOR" min="-2" pref="297" max="-2" attributes="0"/>
@@ -185,6 +185,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Elecciones Presidenciales 2019"/>
       </Properties>
     </Component>

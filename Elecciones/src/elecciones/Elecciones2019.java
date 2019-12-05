@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package elecciones;
 
 import javax.swing.JOptionPane;
 /**
  *
- * @author Nico
+ * @author Nico & Facundo Ferrara
  */
 public class Elecciones2019 extends javax.swing.JFrame {
 
@@ -65,6 +61,7 @@ public class Elecciones2019 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Elecciones Presidenciales 2019");
 
         jLabel2.setText("CANDIDATOS:");
@@ -133,7 +130,7 @@ public class Elecciones2019 extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(114, 114, 114))
                             .addGroup(layout.createSequentialGroup()
@@ -147,7 +144,7 @@ public class Elecciones2019 extends javax.swing.JFrame {
                                     .addComponent(TXT_C3, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TXT_C2, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TXT_C1, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(TXT_POR1)
                                     .addComponent(TXT_POR2)
@@ -157,7 +154,7 @@ public class Elecciones2019 extends javax.swing.JFrame {
                                     .addComponent(TXT_POR6)
                                     .addComponent(TXT_PORBLANCOS)
                                     .addComponent(TXT_PORNULOS, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
-                                .addGap(127, 127, 127))
+                                .addGap(121, 121, 121))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(TXT_GANADOR, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -242,47 +239,58 @@ public class Elecciones2019 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-int C1=0,C2=0,C3=0,C4=0,C5=0,C6=0,BLANCOS=0,NULOS=0,VOTO=0,TOTAL;
+        int C1=0,C2=0,C3=0,C4=0,C5=0,C6=0,BLANCOS=0,NULOS=0,VOTO=0,TOTAL=0;
         double POR1,POR2,POR3,POR4,POR5,POR6,PORBLANCOS,PORNULOS;
         String GANADOR = "";
         do{
-         VOTO=Integer.parseInt(JOptionPane.showInputDialog("ingrese el numero de su candidato y 0 para salir"));   
-         
-         switch(VOTO){
-             case 1:
-                 C1++;
-                 break;
-             case 2:
-                 C2++;
-                 break;
-             case 3:
-                 C3++;
-                 break;
-             case 4:
-                 C4++;
-                 break;
-             case 5:
-                 C5++;
-                 break;
-             case 6:
-                 C6++;
-                 break;
-             case 7:
-                 BLANCOS++;
-                 break;
-             case 8:
-                 NULOS++;
-                 break;
-         }
+            String seleccion = JOptionPane.showInputDialog("ingrese el numero de su candidato y 0 para salir");
+            if(seleccion.isEmpty() || seleccion=="0"){
+                break;
+            }
+            VOTO=Integer.parseInt(seleccion);
+            
+            
+            
+            switch(VOTO){
+                case 1:
+                    C1++;
+                    break;
+                case 2:
+                    C2++;
+                    break;
+                case 3:
+                    C3++;
+                    break;
+                case 4:
+                    C4++;
+                    break;
+                case 5:
+                    C5++;
+                    break;
+                case 6:
+                    C6++;
+                    break;
+                case 7:
+                    BLANCOS++;
+                    break;
+                case 8:
+                    NULOS++;
+                    break;
+                default:
+                    break;
+            }
+            
          TOTAL=C1+C2+C3+C4+C5+C6+BLANCOS+NULOS;
-         POR1=(C1*100)/TOTAL;
-         POR2=(C2*100)/TOTAL;
-         POR3=(C3*100)/TOTAL;
-         POR4=(C4*100)/TOTAL;
-         POR5=(C5*100)/TOTAL;
-         POR6=(C6*100)/TOTAL;
-         PORBLANCOS=(BLANCOS*100)/TOTAL;
-         PORNULOS=(NULOS*100)/TOTAL;
+         if (TOTAL >= 1){
+            POR1=(C1*100)/TOTAL;
+            POR2=(C2*100)/TOTAL;
+            POR3=(C3*100)/TOTAL;
+            POR4=(C4*100)/TOTAL;
+            POR5=(C5*100)/TOTAL;
+            POR6=(C6*100)/TOTAL;
+            PORBLANCOS=(BLANCOS*100)/TOTAL;
+            PORNULOS=(NULOS*100)/TOTAL;
+         
         
           if(C1>C2&&C1>C3&&C1>C4&&C1>C5&&C1>C6){
              GANADOR="Frente de Todos";
@@ -296,7 +304,7 @@ int C1=0,C2=0,C3=0,C4=0,C5=0,C6=0,BLANCOS=0,NULOS=0,VOTO=0,TOTAL;
              GANADOR="Unir";
          }if(C6>C1&&C6>C2&&C6>C3&&C6>C6&&C6>C5){
              GANADOR="NOS";
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }                                        
 TXT_C1.setText(String.valueOf(C1));
          TXT_C2.setText(String.valueOf(C2));
          TXT_C3.setText(String.valueOf(C3));
@@ -317,7 +325,7 @@ TXT_C1.setText(String.valueOf(C1));
          TXT_PORNULOS.setText(String.valueOf(""+PORNULOS+"%"));
          
          TXT_GANADOR.setText(String.valueOf(GANADOR));
-         
+         }
           }while(VOTO!=0);
          }//GEN-LAST:event_jButton1ActionPerformed
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
