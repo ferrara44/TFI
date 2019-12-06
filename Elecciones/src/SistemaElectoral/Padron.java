@@ -88,12 +88,10 @@ public class Padron {
                     if (w.getDNI() == dni){
                         return 1;
                     }
-                    return 3;
                 }
+                return 3;
             }
-            else return 2;
         }
-        System.out.print("FUUUUCK");
-        return 0;
+        return 2;
     }
 }

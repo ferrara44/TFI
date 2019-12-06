@@ -37,9 +37,8 @@ public class Lista {
                 if(p.getNombre().equals(nombre)){
                     return p;
                 }
+        }
         return null;
-    }
-    return null;
     }
 
     public ArrayList<Partido> getPartidos() {

@@ -276,12 +276,18 @@ public class UsoEleccion {
         }
         
         /*Proceso electoral finalizado*/
-        
+        System.out.println();
+        System.out.println("Votaciones finalizadas.");
         int votosTotales = eleccion.getnVotos();
+        System.out.println("Total de votos Emitidos:" + votosTotales);
         int votosBlancos = eleccion.getBlancos();
+        System.out.println("Total de votos en Blanco:" + votosBlancos);
+        System.out.println("Porcentaje de votos en Blanco:" + (100*votosBlancos/votosTotales) +"%");
         int votosNulos = eleccion.getNulos();
-        ArrayList partidos = lista.getPartidos();
-        System.out.println(partidos.toString());
+        System.out.println("Total de votos Anulados:" + votosNulos);
+        System.out.println("Porcentaje de votos Anulados:" + (100*votosNulos/votosTotales) +"%");
+        
+        eleccion.calcularGanador();
     }
     
 }

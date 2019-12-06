@@ -47,6 +47,28 @@ public class Eleccion {
         return nulos;
     }
     
-    
+    public void calcularGanador(){
+        Iterator<Partido> iterator = partidos.partidos.iterator();
+        String ganador = null;
+        String electoNombre = null;
+        String electoApellido = null;
+        int masVotos = 0;
+        while (iterator.hasNext()) {
+                Partido p = iterator.next();
+                String nombre = p.getNombre();
+                int votos = p.getVotos();
+                if (votos > masVotos){
+                    electoNombre = p.getCandidato().getNombre();
+                    electoApellido = p.getCandidato().getApellido();
+                    masVotos = votos;
+                    ganador = nombre;
+                }
+                System.out.println();
+                System.out.println("Partido " + nombre + " tiene " + votos + " votos. (" + (votos*100/this.nVotos) + "%)");
+                }
+        System.out.println("El partido ganador es " + ganador + " con una base de " + masVotos + " votos.");
+        System.out.println("A esto se le suman " + this.blancos + " votos en blanco. Total: " + (this.blancos+masVotos) + " votos. (" + ((this.blancos+masVotos)*100/this.nVotos) +"%)");
+        System.out.println(electoNombre +" "+ electoApellido + " ha ganado las elecciones.");
+    }
     
 }
