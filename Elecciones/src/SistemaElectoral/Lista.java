@@ -19,35 +19,44 @@ public class Lista {
         this.partidos.add(partido);
     }
     
-    boolean eliminarPartido(int dni){
+    boolean eliminarPartido(String nombre){
         Iterator<Partido> iterator = partidos.iterator();
         while (iterator.hasNext()) {
             Partido p = iterator.next();
-//            int documento = v.getDNI();
-//            if (documento == dni){
-//                this.votantes.remove(v);
-//                return true;
-//            }
+            if(p.getNombre().equals(nombre)){
+                this.partidos.remove(p);
+            }
         }
         return false;
+    }
+    
+    public Partido getPartido(String nombre){
+        Iterator<Partido> iterator = partidos.iterator();
+        while (iterator.hasNext()) {
+                Partido p = iterator.next();
+                if(p.getNombre().equals(nombre)){
+                    return p;
+                }
+        return null;
+    }
+    return null;
     }
 
     public ArrayList<Partido> getPartidos() {
         return partidos;
     }
     
-    public void verPadron(){   
+    public void verLista(){   
         
         Iterator<Partido> iterator = partidos.iterator();
-//        System.out.printf("%-15s %-15s %-15s %-15s","Nombre","Apellido","DNI","Voto?");
+        System.out.printf("%-15s %-15s","Lista","Candidato");
         while (iterator.hasNext()) {
-//            Votante v = iterator.next();
-//            String nombre =  v.getNombre();
-//            String apellido = v.getApellido();
-//            int dni = v.getDNI();
-//            boolean voto = v.isEmitido();
-//            System.out.println();
-//            System.out.printf("%-15s %-15s %-15s %-15s",nombre,apellido,dni,voto);
+            Partido p = iterator.next();
+            String lista =  p.getNombre();
+            String nombre = p.getCandidato().getNombre();
+            String apellido = p.getCandidato().getApellido();
+            System.out.println();
+            System.out.printf("%-15s %s %s",lista,nombre,apellido);
         }
     }
 }

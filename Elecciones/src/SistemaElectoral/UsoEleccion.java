@@ -9,6 +9,9 @@ import java.util.*;
 public class UsoEleccion {
     
     public static void main(String[] args){
+        int dni;
+        String nombre;
+        
         /*Cargamos algunos votantes de ejemplo*/
         Votante juan = new Votante("Juan", "Mascota", 35);
         Votante pedro = new Votante("Pedro", "Surucho", 12);
@@ -55,10 +58,11 @@ public class UsoEleccion {
             System.out.println("2 - Agregar una persona al padrón.");
             System.out.println("3 - Quitar una persona del padrón.");
             System.out.println("4 - Ver Listas");
-            System.out.println("5 - Agregar una Lista");
+            System.out.println("5 - Agregar un partido a la lista");
             System.out.println("6 - Quitar una Lista");
             System.out.println("7 - Iniciar Votación.");
-            System.out.println("8 - Salir.");
+            System.out.println("8 - Cancelar y Salir.");
+            System.out.println();
             
             int input = scan.nextInt();
             
@@ -69,13 +73,14 @@ public class UsoEleccion {
                     
                 case 2:
                     System.out.println("Ingrese el nombre de la persona que desea agregar al padrón.");
-                    String nombre = scan.next();
+                    nombre = scan.next();
                     System.out.println("Ingrese el apellido.");
                     String apellido = scan.next();
                     System.out.println("Ingrese el dni");
-                    int dni = scan.nextInt();
+                    dni = scan.nextInt();
                     Votante vot = new Votante(nombre,apellido,dni);
                     padron.agregarVotante(vot);
+                    System.out.println();
                     break;
                     
                 case 3:
@@ -87,11 +92,49 @@ public class UsoEleccion {
                     else{
                         System.out.println("No se ha encontrado ningun elemento con tal DNI.");
                     }
-                
+                    System.out.println();
+                    break;
+                    
                 case 4:
-                    Listas
+                    lista.verLista();
+                    System.out.println();
+                    break;
+                    
+                case 5:
+                    System.out.println("Ingrese el nombre del partido que desea crear.");
+                    nombre = scan.next();
+                    if (nombre.equals("blanco") || nombre.equals("nulo")){
+                        System.out.println("Nombre reservado, intente nuevamente.\n");
+                        break;
+                    }
+                    System.out.println("Ingrese el dni del candidato que desea postular.");
+                    dni = scan.nextInt();
+                    Votante candidato = padron.getVotante(dni);
+                    if (candidato != null){
+                        Partido nuevoPartido = new Partido(nombre,candidato);
+                        lista.agregarPartido(nuevoPartido);
+                        System.out.println("Se ha agregado el partido " + nombre + " y se lo ha agregado a la lista electoral.");
+                    }
+                    else {
+                        System.out.println("No se ha encontrado un candidato con ese dni.");
+                    }
+                    System.out.println();
+                    break;
                     
                 case 6:
+                    System.out.println("Ingrese el nombre del partido que desea quitar.");
+                    nombre = scan.next();
+                    boolean eliminado = lista.eliminarPartido(nombre);
+                    if (eliminado){
+                        System.out.println("Se ha quitado el partido '" + nombre + "' de la lista electoral.");
+                    }
+                    else {
+                        System.out.println("No se ha encontrado el partido '" + nombre + "'");
+                    }
+                    System.out.println();
+                    break;
+                    
+                case 7:
                     System.out.println("Está seguro?");
                     System.out.println("Una vez cerrado el padrón electoral no podrá volver a modificarse.");
                     System.out.println("Y/N");
@@ -105,25 +148,94 @@ public class UsoEleccion {
                                 loop = 0;
                                 innerloop = 0;
                                 break;
+                                
                             case 'N':
                             case 'n':
                                 innerloop = 0;
                                 break;
+                                
                             default:
                                 System.out.println("Valor ingresado incorrecto, vuelva a intentar.");
                                 innerloop = 1;
+                                System.out.println();
                                 break;
                         }
                     }
+                    break;
                     
-                case 7: 
+                case 8: 
                     return;
             }
-            
-            /* Votacion Iniciada */
-            
-            System.out.println("");
-            
+        }
+                    
+        /* Votacion Iniciada */
+
+        System.out.println();
+        padron.inicializarVotacion();
+        Eleccion eleccion = new Eleccion(padron,lista);
+        loop = 1;
+
+        while (loop == 1){
+
+            System.out.println("1 - Ver partidos.");
+            System.out.println("2 - Votar.");
+            System.out.println("3 - Cerrar votación y realizar recuento.");
+            System.out.println("4 - Cancelar y Salir.");
+            System.out.println();
+
+            int input = scan.nextInt();
+
+            switch(input) {
+                case 1:
+                    lista.verLista();
+                    System.out.println();
+                    break;
+                    
+                case 2:
+                    System.out.println("Ingrese dni del votante:");
+                    dni = scan.nextInt();
+                    int estado = padron.evaluarVotante(dni);
+                    switch(estado){
+                        case 1:
+                            System.out.println("El documento es valido para votar.");
+                            lista.verLista();
+                            System.out.println("A continuacion, escriba el nombre del partido que desea votar.");
+                            nombre = scan.next();
+                switch (nombre) {
+                    case "blanco":
+                        eleccion.votoBlanco();
+                        System.out.println("Su voto se ha registrado correctamente.");
+                        System.out.println();
+                        break;
+                    case "nulo":
+                        eleccion.votoNulo();
+                        System.out.println("Su voto se ha registrado correctamente.");
+                        System.out.println();
+                        break;
+                    default:
+                        Votante votante = padron.getVotante(dni);
+                        Partido partido = lista.getPartido(nombre);
+                        if (partido == null){
+                            System.out.println("Error: No se ha encontrado el partido, intente nuevamente.");
+                            System.out.println();
+                            break;
+                        }
+                        eleccion.registrarEmision(votante, partido);
+                        System.out.println("Su voto se ha registrado correctamente.");
+                        System.out.println();
+                        break;
+                }
+                            break;
+
+                        case 2:
+                            System.out.println("Error: Este documento no está registrado en el padrón.");
+                            break;
+                        case 3:
+                            System.out.println("Error: Ya se ha emitido un voto con este documento.");
+                        break;
+                    }
+                    break;
+            }
         }
     }
     

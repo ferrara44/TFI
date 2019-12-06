@@ -8,18 +8,16 @@ import java.util.*;
  */
 public class Eleccion {
     Padron padron;
-    ArrayList partidos;
+    Lista partidos;
     int nVotos;
     int blancos;
     int nulos;
-    boolean urnasCerradas;
 
-    public Eleccion(Padron padron, ArrayList partidos) {
+    public Eleccion(Padron padron, Lista partidos) {
         this.padron = padron;
         this.partidos = partidos;
         this.nVotos = 0;
         this.nulos = 0;
-        this.urnasCerradas = false;
     }
     
     void registrarEmision(Votante votante, Partido partido){

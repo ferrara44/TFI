@@ -14,7 +14,6 @@ public class Votante extends Persona{
         this.DNI = dni;
         this.emitido = false;
     }
-    
 
     public void setEmitido(boolean emitido) {
         this.emitido = emitido;

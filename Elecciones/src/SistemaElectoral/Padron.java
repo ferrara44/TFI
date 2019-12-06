@@ -10,7 +10,7 @@ import java.util.*;
 public class Padron {
     
     ArrayList<Votante> votantes;
-    
+    ArrayList<Votante> pendientes;
 
     public Padron(ArrayList<Votante> votantes) {
         this.votantes = votantes;
@@ -37,7 +37,7 @@ public class Padron {
         return votantes;
     }
     
-    public void verPadron(){   
+    public void verPadron(){
         
         Iterator<Votante> iterator = votantes.iterator();
         System.out.printf("%-15s %-15s %-15s %-15s","Nombre","Apellido","DNI","Voto?");
@@ -50,5 +50,38 @@ public class Padron {
             System.out.println();
             System.out.printf("%-15s %-15s %-15s %-15s",nombre,apellido,dni,voto);
         }
+    }
+    
+    public Votante getVotante(int dni){
+        Iterator<Votante> iterator = votantes.iterator();
+        while (iterator.hasNext()) {
+            Votante v = iterator.next();
+            if (dni == v.getDNI()){
+                return v;
+            }
+        }
+        return null;
+    }
+    
+    public void inicializarVotacion(){
+        this.pendientes = this.votantes;
+    }
+    
+    public int evaluarVotante(int dni){
+        Iterator<Votante> iterator = votantes.iterator();
+        while (iterator.hasNext()) {
+            Votante v = iterator.next();
+            if (v.getDNI() == dni){
+                Iterator<Votante> reiterator = pendientes.iterator();
+                while (reiterator.hasNext()) {
+                    Votante w = reiterator.next();
+                    if (w.getDNI() == dni){
+                        return 3;
+                    }
+                }
+            }
+            else return 1;
+        }
+        return 2;
     }
 }
