@@ -57,5 +57,6 @@ public class Lista {
             System.out.println();
             System.out.printf("%-15s %s %s",lista,nombre,apellido);
         }
+        System.out.println();
     }
 }
