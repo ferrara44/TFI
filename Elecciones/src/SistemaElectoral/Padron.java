@@ -8,64 +8,47 @@ import java.util.*;
  */
 
 public class Padron {
+    
     ArrayList<Votante> votantes;
-    ArrayList<Votante> emitidos;
-    int nVotos;
-    int blancos;
-    int nulos;
-    boolean urnasCerradas;
+    
 
     public Padron(ArrayList<Votante> votantes) {
         this.votantes = votantes;
-        this.emitidos = null;
-        this.nVotos = 0;
-        this.blancos = 0;
-        this.nulos = 0;
-        this.urnasCerradas = false;
     }
     
     void agregarVotante(Votante votante){
         this.votantes.add(votante);
     }
     
-    void eliminarVotante(Votante votante){
-        this.votantes.remove(votante);
+    boolean eliminarVotante(int dni){
+        Iterator<Votante> iterator = votantes.iterator();
+        while (iterator.hasNext()) {
+            Votante v = iterator.next();
+            int documento = v.getDNI();
+            if (documento == dni){
+                this.votantes.remove(v);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<Votante> getVotantes() {
+        return votantes;
     }
     
-    void registrarEmision(Votante votante, Partido partido){
-        this.votantes.remove(votante);
-        this.emitidos.add(votante);
-        this.nVotos += 1;
+    public void verPadron(){   
+        
+        Iterator<Votante> iterator = votantes.iterator();
+        System.out.printf("%-15s %-15s %-15s %-15s","Nombre","Apellido","DNI","Voto?");
+        while (iterator.hasNext()) {
+            Votante v = iterator.next();
+            String nombre =  v.getNombre();
+            String apellido = v.getApellido();
+            int dni = v.getDNI();
+            boolean voto = v.isEmitido();
+            System.out.println();
+            System.out.printf("%-15s %-15s %-15s %-15s",nombre,apellido,dni,voto);
+        }
     }
-
-    void votoBlanco(){
-        this.nVotos +=1;
-        this.blancos += 1;
-    }
-    
-    void votoNulo(){
-        this.nVotos +=1;
-        this.nulos +=1;
-    }
-
-    public boolean isUrnasCerradas() {
-        return urnasCerradas;
-    }
-
-    public void setUrnasCerradas(boolean urnasCerradas) {
-        this.urnasCerradas = urnasCerradas;
-    }
-
-    public int getnVotos() {
-        return nVotos;
-    }
-
-    public int getBlancos() {
-        return blancos;
-    }
-
-    public int getNulos() {
-        return nulos;
-    }
-    
 }
