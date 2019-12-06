@@ -199,44 +199,89 @@ public class UsoEleccion {
                         case 1:
                             System.out.println("El documento es valido para votar.");
                             lista.verLista();
+                            System.out.println();
                             System.out.println("A continuacion, escriba el nombre del partido que desea votar.");
                             nombre = scan.next();
-                switch (nombre) {
-                    case "blanco":
-                        eleccion.votoBlanco();
-                        System.out.println("Su voto se ha registrado correctamente.");
-                        System.out.println();
-                        break;
-                    case "nulo":
-                        eleccion.votoNulo();
-                        System.out.println("Su voto se ha registrado correctamente.");
-                        System.out.println();
-                        break;
-                    default:
-                        Votante votante = padron.getVotante(dni);
-                        Partido partido = lista.getPartido(nombre);
-                        if (partido == null){
-                            System.out.println("Error: No se ha encontrado el partido, intente nuevamente.");
-                            System.out.println();
-                            break;
-                        }
-                        eleccion.registrarEmision(votante, partido);
-                        System.out.println("Su voto se ha registrado correctamente.");
-                        System.out.println();
-                        break;
-                }
+                            switch (nombre) {
+                                case "blanco":
+                                    eleccion.votoBlanco();
+                                    padron.firmarPlanilla(dni);
+                                    System.out.println("Su voto se ha registrado correctamente.");
+                                    System.out.println();
+                                    break;
+                                case "nulo":
+                                    eleccion.votoNulo();
+                                    padron.firmarPlanilla(dni);
+                                    System.out.println("Su voto se ha registrado correctamente.");
+                                    System.out.println();
+                                    break;
+                                default:
+                                    Votante votante = padron.getVotante(dni);
+                                    padron.firmarPlanilla(dni);
+                                    Partido partido = lista.getPartido(nombre);
+                                    if (partido == null){
+                                        System.out.println("Error: No se ha encontrado el partido, intente nuevamente.");
+                                        System.out.println();
+                                        break;
+                                    }
+                                    eleccion.registrarEmision(votante, partido);
+                                    System.out.println("Su voto se ha registrado correctamente.");
+                                    System.out.println();
+                                    break;
+                            }
                             break;
 
                         case 2:
                             System.out.println("Error: Este documento no está registrado en el padrón.");
                             break;
+                            
                         case 3:
                             System.out.println("Error: Ya se ha emitido un voto con este documento.");
-                        break;
+                            break;
                     }
                     break;
+                
+                case 3:
+                    System.out.println("Está seguro?");
+                    System.out.println("Una vez cerradas las urnas no se podrán cargar más votos.");
+                    System.out.println("Y/N");
+                    int innerloop = 1;
+                    while (innerloop == 1){
+                        String cerrarPadron = scan.next();
+                        char answer = cerrarPadron.charAt(0);
+                        switch (answer) {
+                            case 'Y':
+                            case 'y':
+                                loop = 0;
+                                innerloop = 0;
+                                break;
+                                
+                            case 'N':
+                            case 'n':
+                                innerloop = 0;
+                                break;
+                                
+                            default:
+                                System.out.println("Valor ingresado incorrecto, vuelva a intentar.");
+                                innerloop = 1;
+                                System.out.println();
+                                break;
+                        }
+                    }
+                    break;
+                
+                case 4:
+                    return;
             }
         }
+        
+        /*Proceso electoral finalizado*/
+        
+        int votosTotales = eleccion.getnVotos();
+        int votosBlancos = eleccion.getBlancos();
+        int votosNulos = eleccion.getNulos();
+        ArrayList partidos = lista.getPartidos();
+        System.out.println(partidos.toString());
     }
     
 }

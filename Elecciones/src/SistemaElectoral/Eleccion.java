@@ -34,5 +34,19 @@ public class Eleccion {
         this.nVotos +=1;
         this.nulos +=1;
     }
+
+    public int getnVotos() {
+        return nVotos;
+    }
+
+    public int getBlancos() {
+        return blancos;
+    }
+
+    public int getNulos() {
+        return nulos;
+    }
+    
+    
     
 }

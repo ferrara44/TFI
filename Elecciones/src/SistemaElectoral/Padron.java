@@ -40,7 +40,7 @@ public class Padron {
     public void verPadron(){
         
         Iterator<Votante> iterator = votantes.iterator();
-        System.out.printf("%-15s %-15s %-15s %-15s","Nombre","Apellido","DNI","Voto?");
+        System.out.printf("%-15s %-15s %-15s","Nombre","Apellido","DNI");
         while (iterator.hasNext()) {
             Votante v = iterator.next();
             String nombre =  v.getNombre();
@@ -48,7 +48,7 @@ public class Padron {
             int dni = v.getDNI();
             boolean voto = v.isEmitido();
             System.out.println();
-            System.out.printf("%-15s %-15s %-15s %-15s",nombre,apellido,dni,voto);
+            System.out.printf("%-15s %-15s %-15s",nombre,apellido,dni);
         }
     }
     
@@ -64,7 +64,17 @@ public class Padron {
     }
     
     public void inicializarVotacion(){
-        this.pendientes = this.votantes;
+        this.pendientes = new ArrayList<>(this.votantes);
+    }
+    
+    public void firmarPlanilla(int dni){
+        Iterator<Votante> iterator = votantes.iterator();
+        while (iterator.hasNext()) {
+            Votante v = iterator.next();
+            if (v.getDNI() == dni){
+                this.pendientes.remove(v);
+            }
+        }
     }
     
     public int evaluarVotante(int dni){
@@ -76,12 +86,14 @@ public class Padron {
                 while (reiterator.hasNext()) {
                     Votante w = reiterator.next();
                     if (w.getDNI() == dni){
-                        return 3;
+                        return 1;
                     }
+                    return 3;
                 }
             }
-            else return 1;
+            else return 2;
         }
-        return 2;
+        System.out.print("FUUUUCK");
+        return 0;
     }
 }

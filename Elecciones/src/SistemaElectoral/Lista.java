@@ -49,7 +49,7 @@ public class Lista {
     public void verLista(){   
         
         Iterator<Partido> iterator = partidos.iterator();
-        System.out.printf("%-15s %-15s","Lista","Candidato");
+        System.out.printf("%-15s %-15s","Nombre","Candidato");
         while (iterator.hasNext()) {
             Partido p = iterator.next();
             String lista =  p.getNombre();
